@@ -1,0 +1,1 @@
+{"num_layers": 2, "in_feats": 512, "out_feats": 64, "emb_size": 64, "hidden_size": 32, "gcn_layers": 3, "gat_layers": 2}
