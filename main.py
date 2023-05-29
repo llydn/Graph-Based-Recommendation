@@ -379,16 +379,24 @@ class MyModel(nn.Module):
         self.citation_diffusion_layer = nn.ModuleList([GraphGAT(self.emb_size, self.hidden_size, int(
             self.emb_size/self.hidden_size), n_layers=self.gat_layers, activation=F.relu)for _ in range(self.num_layers)])
 
-        self.graph_u_i_attention_layer = nn.ModuleList([nn.Sequential(nn.Linear(self.emb_size*2, 1),
+        self.graph_u_i_attention_layer = nn.ModuleList([nn.Sequential(nn.Linear(self.emb_size*2, self.emb_size),
+                                                                      nn.Tanh(),
+                                                                      nn.Linear(self.emb_size,1),
                                                                       nn.LeakyReLU())
                                                         for i in range(self.num_layers)])
-        self.graph_i_u_attention_layer = nn.ModuleList([nn.Sequential(nn.Linear(self.emb_size*2, 1),
+        self.graph_i_u_attention_layer = nn.ModuleList([nn.Sequential(nn.Linear(self.emb_size*2, self.emb_size),
+                                                                      nn.Tanh(),
+                                                                      nn.Linear(self.emb_size,1),
                                                                       nn.LeakyReLU())
                                                         for i in range(self.num_layers)])
-        self.graph_u_u_attention_layer = nn.ModuleList([nn.Sequential(nn.Linear(self.emb_size*2, 1),
+        self.graph_u_u_attention_layer = nn.ModuleList([nn.Sequential(nn.Linear(self.emb_size*2, self.emb_size),
+                                                                      nn.Tanh(),
+                                                                      nn.Linear(self.emb_size,1),
                                                                       nn.LeakyReLU())
                                                         for i in range(self.num_layers)])
-        self.graph_i_i_attention_layer = nn.ModuleList([nn.Sequential(nn.Linear(self.emb_size*2, 1),
+        self.graph_i_i_attention_layer = nn.ModuleList([nn.Sequential(nn.Linear(self.emb_size*2, self.emb_size),
+                                                                      nn.Tanh(),
+                                                                      nn.Linear(self.emb_size,1),
                                                                       nn.LeakyReLU())
                                                         for i in range(self.num_layers)])
 
